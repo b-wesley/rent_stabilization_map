@@ -1,0 +1,44 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map-container {
+  height: 100%;
+  background-color: rgb(0, 110, 193);
+}
+
+#title-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flext-start;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  /*
+  Align the title at the top center of the screen
+  */
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  position: absolute;
+  height: 100px;
+  width: 1000px;
+
+
+  background-color: rgb(231, 246, 246);
+  color: black;
+  text-align: center;
+  border: 10px black;
+
+  z-index:3;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+#community_districts {
+  opacity: 0.2;
+  color: #000000;
+}
