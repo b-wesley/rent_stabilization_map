@@ -27,18 +27,18 @@ body, html {
   transform: translate(-50%);
   position: absolute;
   height: 100px;
-  width: 1000px;
+  width: 600px;
 
 
   background-color: rgb(231, 246, 246);
   color: black;
   text-align: center;
-  border: 10px black;
-
   z-index:3;
-  border: solid black;
+
   border-radius: 12px;
   padding: 24px;
+  box-shadow: 2px 2px 2px 2px gray;
+
 }
 
 #community_districts {
@@ -62,9 +62,11 @@ panel with info
   color: black;
   text-align: center;
 
-  border: solid black;
   border-radius: 12px;
+  
+  
   padding: 24px;
+  box-shadow: 2px 2px 2px 2px gray;
 
   
 }

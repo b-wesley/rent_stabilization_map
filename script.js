@@ -1,9 +1,8 @@
+
 mapboxgl.accessToken = "pk.eyJ1IjoiYnJhbnQxIiwiYSI6ImNtbmkydXgyMjA5Y2oycHE1cGh3dXpoNGQifQ.L0mt6vFXI9udGY2BO1XFUA"
 
 
 // boilerplate map stuff
-
-
 const map = new mapboxgl.Map({
     container: 'map-container',
     style: 'mapbox://styles/mapbox/standard', // Use the standard style for the map
@@ -56,9 +55,24 @@ map.on('style.load', () => {
       'line-opacity': 1
 
     }
-  })
-})
+  });
 
+  // adding rs units to map
+  map.addSource('rs_units', {
+    'type': 'geojson',
+    'data': 'data/rent_stab.geojson'
+  });
+
+  map.addLayer({
+    'id': 'rs_units',
+    'type': 'circle',
+    'source': 'rs_units',
+    //'visibility': false,
+    'paint': {
+      'circle-color': '#000000' //TODO: Color by bucket/j51/421a
+    }
+  });
+})
 
 // adding the rent stab data
 /*
@@ -67,3 +81,8 @@ const rent_stab_data = File("/data/rent_stab_waterfall.csv")
 const_rent_stab_json = Papa.parse(rent_stab_data)
 */
 
+// interactivity zone
+map.on('click', 'community_districts', (e) => {
+  const boro_cd = e.features[0].properties.BoroCD;
+  console.log(boro_cd);
+});
