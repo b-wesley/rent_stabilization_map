@@ -68,21 +68,95 @@ map.on('style.load', () => {
     'type': 'circle',
     'source': 'rs_units',
     //'visibility': false,
-    'paint': {
-      'circle-color': '#000000' //TODO: Color by bucket/j51/421a
-    }
+
+    // set dot color based on RS program
+    //'paint': {
+      /*
+      'circle-color': [
+        'match',
+        ['get', 'rs_bucket'],
+        "Legacy (Pre-1974)", "#5C0f00",
+        "Programatic Rent Stabilization", "#c92200",
+        "Government-Subsidized", "#f66d04",
+        "Mixed Income Rent-Stabilized", "#f0654a",
+        "Other Rent Stabilization", "#b06c2c",
+        "#000000"
+      ] //TODO: Color by bucket/j51/421a
+      
+       */
+    //}
+
+    // set dot color based on number of units lost since 2019
   });
+
+  map.setPaintProperty('rs_units', 'circle-color',[
+        'interpolate',
+        ['linear'],
+        ['get', 'rs_change_19_24'],
+        -750, "#5c0f00",
+        -500, "#b9361c",
+        -50, "#ea4c2d",
+        -0.5, "#ffd3d0",
+        0, "white",
+        0.5, "#c1efbf",
+        10, "#64c73a",
+        50, "#16a320",
+        100, "#005c00",
+      ]
+
+  );
 })
 
-// adding the rent stab data
-/*
-const Papa = require("papaparse");
-const rent_stab_data = File("/data/rent_stab_waterfall.csv")
-const_rent_stab_json = Papa.parse(rent_stab_data)
-*/
+const color_scale = {
+  '-750': "#5c0f00",
+  '-500': "#b9361c",
+  '-50': "#ea4c2d",
+  '-1': "#ffd3d0",
+  '0': "white",
+  '+1': "#c1efbf",
+  '+10': "#64c73a",
+  '+50': "#16a320",
+  '+100': "#005c00",
+}
+
+// add legend
+const legend = document.createElement('div');
+legend.className = 'legend';
+legend.innerHTML = `<h4>Change in Rent-Stabilized <br>Units Since 2019</h4>`;
+
+Object.entries(color_scale).forEach(([rs_change, color]) => {
+  const color_step = document.createElement('div');
+
+  color_step.className = 'legend-item';
+  color_step.innerHTML = `
+        <span class="legend-circle" style="background-color: ${color}"></span>
+        <span class="legend-label">${rs_change}</span>
+    `;
+    legend.appendChild(color_step);
+});
+
+document.body.appendChild(legend);
+
 
 // interactivity zone
+
+// tooltip
+const tooltip = document.getElementById('tooltip');
+
+map.on('click', 'rs_units', (e) => {
+  map.getCanvas().style.cursor = 'pointer';
+  tooltip.style.display = 'block';
+});
+
+map.on('mousemove', 'rs_units', (e) => {
+  const props = e.features[0].properties;
+  const unit_change = props.rs_unit_change_19_24
+  tooltip.innerHTML = `Change in `
+})
+
+// clickin' districts
 map.on('click', 'community_districts', (e) => {
   const boro_cd = e.features[0].properties.BoroCD;
   console.log(boro_cd);
 });
+
