@@ -33,20 +33,19 @@ map.on('style.load', () => {
   });
 
   //cd fill
-  /*
+  
   map.addLayer({
     'id': 'community_districts',
     'type': 'fill',
     'source': 'cds',
     'paint': {
-      //"fill-color": ["step",["get","rs_unit_count"],"#ffeda0",10,"#ffeda0",20,"#fed976",50,"#feb24c",100,"#fd8d3c",200,"#fc4e2a",500,"#e31a1c",750,"hsl(348, 100%, 37%)",1000,"#bd0026"]
-      'fill-color': "#a987dc",
-      'fill-opacity': 0.1,
+      
+      'fill-opacity': 0,
       'fill-outline-color': 'black'
 
     }
   });
-  */
+  
 
   map.addLayer({
     'id': 'cd_outlines',
@@ -159,12 +158,10 @@ map.on('mousemove', 'rs_units', (e) => {
   tooltip.style.top = e.point.y + 15 + 'px';
   
   if(unit_change < 0) {
-    tooltip.innerHTML = `<h2><b>${unit_change}</b> RS Units</h2> since 2019<br>
-    <hr>BBL: ${props.bbl}`;
+    tooltip.innerHTML = `${props.address}<h2>${unit_change} RS Units</h2>`;
   }
   else {
-    tooltip.innerHTML = `<h2><b>+${unit_change}</b> RS Units</h2> since 2019<br>
-    <hr>BBL: ${props.bbl}`;
+    tooltip.innerHTML = `${props.address}<h2>+${unit_change} RS Units</h2>`;
   }
 
 });
@@ -175,15 +172,17 @@ map.on('mouseenter', 'rs_units', (e) => {
 });
 
 map.on('mouseleave', 'rs_units', (e) => {
-  const props = e.features[0].properties;
-  const unit_change = props.rs_change_19_24;
   tooltip.style.display = 'none';
   
 });
 
+const cd_box = document.getElementById('cd_box');
+
+
 // clickin' districts
 map.on('click', 'community_districts', (e) => {
   const boro_cd = e.features[0].properties.BoroCD;
-  console.log(boro_cd);
+  const cdta_name = e.features[0].properties.CDTAName;
+  console.log(e.features[0].properties);
 });
 

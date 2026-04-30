@@ -23,6 +23,9 @@ cdtas <- read.csv('data/cdta_names.csv') %>%
   mutate(cd = code_cd(CDTA2020)) %>%
   select(cd, CDTAName)
 
+pluto <- read.csv('data/nyc_pluto_25v4_csv/pluto_25v4.csv') %>%
+  select(borough, bbl, address, unitsres)
+
 rent_stab_external <- read.csv("data/external_rent_stab.csv") %>%
   select(-c(X)) %>%
   mutate(rs_bucket = case_when( 
