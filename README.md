@@ -2,7 +2,6 @@
 
 todo:
 - fix color scheme
-- join mappluto data for address in tooltip/info panel
 - aggregate points when further out
 - filter to +/- units only
 
@@ -16,9 +15,6 @@ todo:
   - cd stats in info panel
   - zoom to cd
   - illuminate the points in that cd
-
-- tooltip
-  - address, no. of units +/-
 
 - pop up
   - further property info i guess
