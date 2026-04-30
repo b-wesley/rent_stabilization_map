@@ -18,8 +18,8 @@ const map = new mapboxgl.Map({
         }
   },
     projection: 'globe', // display the map as a globe
-    zoom: 12, // initial zoom level, 0 is the world view, higher values zoom in
-    center: [-73.98839, 40.73639] // center the map on this longitude and latitude
+    zoom: 10, // initial zoom level, 0 is the world view, higher values zoom in
+    center: [-74.04558, 40.70525] // center the map on this longitude and latitude
 });
 
 map.addControl(new mapboxgl.NavigationControl());
