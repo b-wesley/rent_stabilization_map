@@ -26,13 +26,14 @@ map.addControl(new mapboxgl.NavigationControl());
 
 // add CDs
 map.on('style.load', () => {
-
+  map.getCanvas().style.cursor = 'pointer';
   map.addSource('cds', {
     'type': 'geojson',
     'data': 'data/nycd.geojson'
   });
 
   //cd fill
+  /*
   map.addLayer({
     'id': 'community_districts',
     'type': 'fill',
@@ -45,6 +46,7 @@ map.on('style.load', () => {
 
     }
   });
+  */
 
   map.addLayer({
     'id': 'cd_outlines',
@@ -144,15 +146,40 @@ document.body.appendChild(legend);
 const tooltip = document.getElementById('tooltip');
 
 map.on('click', 'rs_units', (e) => {
-  map.getCanvas().style.cursor = 'pointer';
-  tooltip.style.display = 'block';
+  const props = e.features[0].properties;
+  console.log(props);
+  console.log(props.rs_change_19_24);
 });
 
+// bring up address/bbl and unit change in tooltip
 map.on('mousemove', 'rs_units', (e) => {
   const props = e.features[0].properties;
-  const unit_change = props.rs_unit_change_19_24
-  tooltip.innerHTML = `Change in `
-})
+  const unit_change = props.rs_change_19_24;
+  tooltip.style.left = e.point.x + 15 + 'px';
+  tooltip.style.top = e.point.y + 15 + 'px';
+  
+  if(unit_change < 0) {
+    tooltip.innerHTML = `<h2><b>${unit_change}</b> RS Units</h2> since 2019<br>
+    <hr>BBL: ${props.bbl}`;
+  }
+  else {
+    tooltip.innerHTML = `<h2><b>+${unit_change}</b> RS Units</h2> since 2019<br>
+    <hr>BBL: ${props.bbl}`;
+  }
+
+});
+
+map.on('mouseenter', 'rs_units', (e) => {
+  tooltip.style.display = 'block';
+  
+});
+
+map.on('mouseleave', 'rs_units', (e) => {
+  const props = e.features[0].properties;
+  const unit_change = props.rs_change_19_24;
+  tooltip.style.display = 'none';
+  
+});
 
 // clickin' districts
 map.on('click', 'community_districts', (e) => {

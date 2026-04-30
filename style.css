@@ -2,6 +2,8 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
 }
 
 
@@ -12,12 +14,13 @@ body, html {
 }
 
 #title-banner{
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   align-items: flext-start;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+  max-height: 100px;
 
   /*
   Align the title at the top center of the screen
@@ -26,18 +29,17 @@ body, html {
   left: 50%;
   transform: translate(-50%);
   position: absolute;
-  height: 100px;
-  width: 600px;
-
+ 
 
   background-color: white;
   color: black;
+  opacity: 0.9;
   text-align: center;
   z-index:3;
 
   border-radius: 12px;
-  padding: 24px;
-  box-shadow: 2px 2px 2px 2px gray;
+  padding: 12px;
+  box-shadow: 0 2px 8px  rgba(0, 0, 0, 0.224);
 
 }
 
@@ -50,25 +52,43 @@ body, html {
 panel with info
 */
 #info-panel {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   justify-content: left;
   position: absolute;
   left: 10px;
   z-index: 4;
-  top: 120px;
+  top: 20px;
 
   background-color: white;
   color: black;
-  text-align: center;
+  opacity: 0.8;
+  box-shadow: 0 2px 8px  rgba(0, 0, 0, 0.224);
 
+  
+
+
+  max-width: 300px;
   border-radius: 12px;
+  padding: 16px;
   
-  
-  padding: 24px;
-  box-shadow: 2px 2px 2px 2px gray;
 
   
+}
+
+.tooltip {
+    position: absolute;
+    background: white;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    display: none;
+    z-index: 2000;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0.85;
 }
 
 /*
@@ -77,13 +97,13 @@ legend code stolen from class 3 demo
 .legend {
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    left: 20px;
     background: white;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    font-family: 'Arial', sans-serif;
+    opacity: 0.9;
 }
 
 .legend h4 {
