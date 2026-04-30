@@ -4,8 +4,8 @@ When New York passed the Housing Stability and Tenant Protection Act of 2019, it
 
 Currently the map simply displays where and how many units were removed from rent stabilization, but future versions will incorporate high-level community district statistics about rent stabilizations and further information about the characteristics of RS units and the programs under which they are stabilized. 
 
-todo:
-- fix color scheme
+todo (for final project:
+- make color scheme look nicer
 - aggregate points when further out
 - filter to +/- units only
 
