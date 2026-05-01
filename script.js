@@ -29,7 +29,7 @@ map.on('style.load', () => {
   map.getCanvas().style.cursor = 'pointer';
   map.addSource('cds', {
     'type': 'geojson',
-    'data': 'data/nycd.geojson'
+    'data': 'data/cds_with_info.geojson'
   });
 
   //cd fill
@@ -181,8 +181,18 @@ const cd_box = document.getElementById('cd_box');
 
 // clickin' districts
 map.on('click', 'community_districts', (e) => {
-  const boro_cd = e.features[0].properties.BoroCD;
-  const cdta_name = e.features[0].properties.CDTAName;
+  const props = e.features[0].properties;
+
+  const cdta_name = props.CDTAName;
+  const rs_unit_count = props.rs_unit_count.toLocaleString('en');
+  const net_change = props.cd_net_unit_change.toLocaleString('en');
+
   console.log(e.features[0].properties);
+
+  cd_box.innerHTML = `${cdta_name}
+                      <hr>
+                      Total RS Units: ${rs_unit_count}<br>
+                      Net RS Unit Change Since 2019: ${net_change}<br>
+  `
 });
 

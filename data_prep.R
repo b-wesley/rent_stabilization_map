@@ -24,7 +24,7 @@ cdtas <- read.csv('data/cdta_names.csv') %>%
   select(cd, CDTAName)
 
 pluto <- read.csv('data/nyc_pluto_25v4_csv/pluto_25v4.csv') %>%
-  select(borough, bbl, address, unitsres)
+  select(borough, bbl, address)
 
 rent_stab_external <- read.csv("data/external_rent_stab.csv") %>%
   select(-c(X)) %>%
@@ -36,11 +36,28 @@ rent_stab_external <- read.csv("data/external_rent_stab.csv") %>%
           .default = "Other Rent Stabilization"
          )) %>%
   left_join(waterfall, by="bbl") %>%
-  left_join(cdtas, by="cd")%>%
-  filter(rs_change_19_24 != 0 & !is.na(rs_change_19_24)) %>%
+  left_join(cdtas, by="cd") %>%
+  left_join(pluto, by="bbl") %>%
+  filter(rs_change_19_24 != 0 & !is.na(rs_change_19_24)) 
+
+rs_out <- rent_stab_external %>%
   st_as_sf(coords = c("longitude", "latitude")) %>%
   st_write("data/rent_stab2.geojson")
+
+rs_cd_stats <- rent_stab_external %>%
+  group_by(cd) %>%
+  summarize(rs_unit_count = sum(RS_Unit_Count),
+            cd_net_unit_change = sum(rs_change_19_24),
+            total_units = sum(unitsres),
+            rs_pct = rs_unit_count / total_units) 
   
 rent_stab_json <- toJSON(rent_stab_external, dataframe='rows', pretty= TRUE)
 
 write(rent_stab_json, "data/rent_stab_0427.json")
+
+cd_shp <- read_sf('data/nycd_26a/nycd.shp') %>%
+  rename(cd = BoroCD) %>%
+  left_join(rs_cd_stats, by='cd') %>%
+  left_join(cdtas, by = 'cd') %>%
+  st_transform(4326) %>%
+  st_write("data/cds_with_info2.geojson")
