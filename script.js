@@ -27,18 +27,19 @@ map.addControl(new mapboxgl.NavigationControl());
 // add CDs
 map.on('style.load', () => {
   map.getCanvas().style.cursor = 'pointer';
+
   map.addSource('cds', {
-    'type': 'geojson',
-    'data': 'data/cds_with_info.geojson'
+    type: 'geojson',
+    data: 'data/cds_with_info.geojson'
   });
 
   //cd fill
   
   map.addLayer({
-    'id': 'community_districts',
-    'type': 'fill',
-    'source': 'cds',
-    'paint': {
+    id: 'community_districts',
+    type: 'fill',
+    source: 'cds',
+    paint: {
       
       'fill-opacity': 0,
       'fill-outline-color': 'black'
@@ -48,26 +49,43 @@ map.on('style.load', () => {
   
 
   map.addLayer({
-    'id': 'cd_outlines',
-    'type': 'line',
-    'source': 'cds',
-    'paint': {
+    id: 'cd_outlines',
+    type: 'line',
+    source: 'cds',
+    paint: {
       'line-color': "#000000",
       'line-opacity': 1
 
     }
   });
 
+  // cd highlights
+  map.addLayer({
+    id: 'cd-highlight',
+    type:'line',
+    source:'cds',
+    layout:{},
+    paint:{
+      'line-color': "#ea00ff",
+      'line-width': 5,
+      'line-opacity': 1,
+      'line-emissive-strength': 1,
+      'line-gap-width': 1
+      
+    },
+    filter: ['==', 'cd', '']
+  });
+
   // adding rs units to map
   map.addSource('rs_units', {
-    'type': 'geojson',
-    'data': 'data/rent_stab.geojson'
+    type: 'geojson',
+    data: 'data/rent_stab.geojson'
   });
 
   map.addLayer({
-    'id': 'rs_units',
-    'type': 'circle',
-    'source': 'rs_units',
+    id: 'rs_units',
+    type: 'circle',
+    source: 'rs_units',
     //'visibility': false,
 
     // set dot color based on RS program
@@ -141,6 +159,7 @@ document.body.appendChild(legend);
 
 // interactivity zone
 
+//-------------------------------------rs units---------------------------
 // tooltip
 const tooltip = document.getElementById('tooltip');
 
@@ -175,17 +194,19 @@ map.on('mouseleave', 'rs_units', (e) => {
   tooltip.style.display = 'none';
   
 });
-
+//------------------------------------------------CD LOGIC------------------------------------
 const cd_box = document.getElementById('cd_box');
-
 
 // clickin' districts
 map.on('click', 'community_districts', (e) => {
+    
+  //pull up cd info box
   const props = e.features[0].properties;
 
   const cdta_name = props.CDTAName;
   const rs_unit_count = props.rs_unit_count.toLocaleString('en');
   const net_change = props.cd_net_unit_change.toLocaleString('en');
+  
 
   console.log(e.features[0].properties);
 
@@ -194,5 +215,8 @@ map.on('click', 'community_districts', (e) => {
                       Total RS Units: ${rs_unit_count}<br>
                       Net RS Unit Change Since 2019: ${net_change}<br>
   `
+  // highlight it 
+  map.setFilter('cd-highlight', ['==', 'cd', props.cd]);
+
 });
 
