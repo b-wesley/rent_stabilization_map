@@ -1,4 +1,4 @@
-# Map of (Probably) Illegally De-Stabilized Units
+# [Map of Illegally De-Stabilized Units](https://b-wesley.github.io/rent_stabilization_map/)
 
 When New York passed the Housing Stability and Tenant Protection Act of 2019, it became illegal for landlords to remove apartments from rent stabilization with a few very specific exceptions. This map uses DOF property tax bill data to locate buildings where the number of Rent-Stabilized Units has changed between 2019 and 2024. 
 
