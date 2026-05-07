@@ -89,21 +89,17 @@ map.on('style.load', () => {
     //'visibility': false,
 
     // set dot color based on RS program
-    //'paint': {
-      /*
-      'circle-color': [
-        'match',
-        ['get', 'rs_bucket'],
-        "Legacy (Pre-1974)", "#5C0f00",
-        "Programatic Rent Stabilization", "#c92200",
-        "Government-Subsidized", "#f66d04",
-        "Mixed Income Rent-Stabilized", "#f0654a",
-        "Other Rent Stabilization", "#b06c2c",
-        "#000000"
-      ] //TODO: Color by bucket/j51/421a
-      
-       */
-    //}
+    'paint': {
+      'circle-radius': [
+                    'interpolate',
+                    ['exponential', 1.75],
+                    ['zoom'],
+                    12,
+                    2,
+                    22,
+                    180
+                ],
+    }
 
     // set dot color based on number of units lost since 2019
   });
