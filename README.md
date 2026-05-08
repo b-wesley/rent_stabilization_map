@@ -7,13 +7,17 @@ Currently the map simply displays where and how many units were removed from ren
 todo (for final project):
 - make color scheme look nicer
 - aggregate points when further out
-- filter to +/- units only
+- filter to:
+    - +/- units only
+    - no history of 421a/j51
+    - 
 
 - info panel
-  - toggle button 
+  - toggle/close button 
   - high-level stats
     - 2019 rs unit count vs 2024
     - no. of total units
+    - total rs units
 
 - click cds
   - cd stats in info panel
