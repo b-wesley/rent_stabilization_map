@@ -40,9 +40,21 @@ map.on('style.load', () => {
     type: 'fill',
     source: 'cds',
     paint: {
-      
-      'fill-opacity': 0,
-      'fill-outline-color': 'black'
+      'fill-opacity': .9,
+      'fill-color': [
+        'interpolate',
+        ['linear'],
+        ['get', 'cd_net_unit_change'],
+        -750, "#5c0f00",
+        -100, "#b9361c",
+        -50, "#ea4c2d",
+        -0.5, "#f66d04",
+        0, "white",
+        0.5, "#7fc17d",
+        10, "#64c73a",
+        50, "#16a320",
+        100, "#005c00",
+      ]
 
     }
   });
