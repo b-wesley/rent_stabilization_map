@@ -56,10 +56,11 @@ map.on('style.load', () => {
         50, "#7fbc41",
         100, "#4d9221",
       ]
-
     }
+
   });
   
+  //map.setLayoutProperty('community_districts', 'visibility', 'none');
 
   map.addLayer({
     id: 'cd_outlines',
@@ -105,7 +106,7 @@ map.on('style.load', () => {
       'circle-emissive-strength': 1,
       'circle-radius': [
                     'interpolate',
-                    ['exponential', 1.75],
+                    ['exponential', 2.72],
                     ['zoom'],
                     12,
                     2,
@@ -228,6 +229,7 @@ map.on('click', 'community_districts', (e) => {
 document.getElementById('cd-toggle').addEventListener('change', (e) => {
   console.log('toggle time');
   const opacity = e.target.checked ? 0.8 : 0;
+  const vis = e.target.checked ? 'visible' : 'none';
 
   map.setPaintProperty('community_districts', 'fill-opacity', opacity);
   map.setPaintProperty('cd_outlines', 'line-opacity', opacity);

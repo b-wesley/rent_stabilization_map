@@ -60,4 +60,5 @@ cd_shp <- read_sf('data/nycd_26a/nycd.shp') %>%
   left_join(rs_cd_stats, by='cd') %>%
   left_join(cdtas, by = 'cd') %>%
   st_transform(4326) %>%
-  st_write("data/cds_with_info2.geojson")
+  mutate(cd_center = st_centroid(geometry)) %>%
+  st_write("data/cds_with_info3.geojson")
