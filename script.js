@@ -250,3 +250,20 @@ document.getElementById('building-toggle').addEventListener('change', (e) => {
 
   map.setLayoutProperty('rs_units', 'visibility', visibility);
 });
+
+// -----info splash screen modal fucntionality -----------------
+var modal = document.getElementById("info-panel");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 

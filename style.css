@@ -51,18 +51,21 @@ panel with info
 #info-panel {
   display: inline-block;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
   position: absolute;
-  left: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 4;
-  top: 20px;
+  
 
   background-color: white;
   color: black;
-  opacity: 0.8;
-  box-shadow: 0 2px 8px  rgba(0, 0, 0, 0.224);
+  opacity: 1;
+  box-shadow: 0 20px 80px  rgba(0, 0, 0, 0.5);
 
-  max-width: 300px;
+  width: 60%;
+  height: 60%;
   border-radius: 12px;
   padding: 16px;
 
@@ -73,9 +76,9 @@ panel with info
   flex-direction: column;
   justify-content: left;
   position: absolute;
-  right: 20px;
+  left: 20px;
   z-index: 4;
-  bottom: 150px;
+  top: 20px;
 
   background-color: white;
   color: black;
@@ -217,4 +220,20 @@ legend code stolen from class 3 demo
   max-width: 300px;
   border-radius: 12px;
   padding: 16px;
+}
+
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
