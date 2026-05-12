@@ -20,6 +20,8 @@ todo (for final project):
     - no. of total units
     - total rs units
 
+- add sources and helpful links
+
 - click cds
   - illuminate the points in that cd
 
