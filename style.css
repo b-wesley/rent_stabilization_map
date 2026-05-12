@@ -52,6 +52,7 @@ panel with info
   display: inline-block;
   flex-direction: column;
   text-align: center;
+  justify-content: center;
 
   position: absolute;
   left: 50%;
