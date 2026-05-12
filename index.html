@@ -13,7 +13,10 @@
 <body>
   <div id="title-banner">
     <h1>Your Rent Might Be Too High!!</h1>
-    <p>Mouse over a building to see how many units have been removed from Rent Stabilization since 2019</p>
+    <p>Mouse over a building to see how many units have been 
+      removed from Rent Stabilization since 2019<br>
+      Click on a Community District for more info
+    </p>
   </div>
   <div id="info-panel">
     <h3>WHAT AM I LOOKING AT???</h3>
@@ -31,8 +34,21 @@
     maybe get some money or a re-stabilized apartment
     if you're lucky.
   </div>
+
+  <div class="control-panel">
+            <div class="panel-header">Options</div>
+            <label class="toggle-item">
+                <input type="checkbox" id="cd-toggle" unchecked>
+                <span>Show CD Fill</span>
+            </label>
+            <label class="toggle-item">
+                <input type="checkbox" id="building-toggle" checked>
+                <span>Show RS Buildings</span>
+            </label>
+        </div>
+
   <div id="tooltip" class="tooltip"></div>
-  <div id="cd_box" class="cd_box"></div>
+  <div id="cd_box" class="cd_box">Click on a Community District for More Info!</div>
   <div id="map-container"></div>
   <script src="script.js"></script>
 

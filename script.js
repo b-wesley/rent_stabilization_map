@@ -8,7 +8,7 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/standard', // Use the standard style for the map
     config: {
         basemap: {
-        lightPreset: 'day',
+        lightPreset: 'night',
         showPointOfInterestLabels: false,
         showRoadLabels: false,
         show3dTrees: false,
@@ -40,20 +40,21 @@ map.on('style.load', () => {
     type: 'fill',
     source: 'cds',
     paint: {
-      'fill-opacity': .9,
+      'fill-opacity': 0,
+      'fill-emissive-strength': 0.6,
       'fill-color': [
         'interpolate',
         ['linear'],
         ['get', 'cd_net_unit_change'],
-        -750, "#5c0f00",
-        -100, "#b9361c",
-        -50, "#ea4c2d",
-        -0.5, "#f66d04",
+        -750, "#d01c8b",
+        -100, "#e9a3c9",
+        -50, "#f1b6da",
+        -0.5, "#fde0ef",
         0, "white",
-        0.5, "#7fc17d",
-        10, "#64c73a",
-        50, "#16a320",
-        100, "#005c00",
+        0.5, "#e6f5d0",
+        10, "#b8e186",
+        50, "#7fbc41",
+        100, "#4d9221",
       ]
 
     }
@@ -66,8 +67,7 @@ map.on('style.load', () => {
     source: 'cds',
     paint: {
       'line-color': "#000000",
-      'line-opacity': 1
-
+      'line-opacity': 0
     }
   });
 
@@ -81,7 +81,7 @@ map.on('style.load', () => {
       'line-color': "#ea00ff",
       'line-width': 5,
       'line-opacity': 1,
-      'line-emissive-strength': 1,
+      'line-emissive-strength': .7,
       'line-gap-width': 1
       
     },
@@ -102,6 +102,7 @@ map.on('style.load', () => {
 
     // set dot color based on RS program
     'paint': {
+      'circle-emissive-strength': 1,
       'circle-radius': [
                     'interpolate',
                     ['exponential', 1.75],
@@ -120,30 +121,26 @@ map.on('style.load', () => {
         'interpolate',
         ['linear'],
         ['get', 'rs_change_19_24'],
-        -750, "#5c0f00",
-        -100, "#b9361c",
-        -50, "#ea4c2d",
-        -0.5, "#f66d04",
+        -750, "#d01c8b",
+        -100, "#e9a3c9",
+        -1, "#f1b6da",
         0, "white",
-        0.5, "#7fc17d",
-        10, "#64c73a",
-        50, "#16a320",
-        100, "#005c00",
+        1, "#b8e186",
+        50, "#7fbc41",
+        100, "#4d9221",
       ]
 
   );
 })
 
 const color_scale = {
-  '-750': "#5c0f00",
-  '-500': "#b9361c",
-  '-50': "#ea4c2d",
-  '-1': "#f66d04",
+  '-750': "#d01c8b",
+  '-100': "#e9a3c9",
+  '-1': "#f1b6da",
   '0': "white",
-  '+1': "#7fc17d",
-  '+10': "#64c73a",
-  '+50': "#16a320",
-  '+100': "#005c00",
+  '+1': "#b8e186",
+  '+50': "#7fbc41",
+  '+100': "#4d9221",
 }
 
 // add legend
@@ -203,7 +200,6 @@ map.on('mouseleave', 'rs_units', (e) => {
   
 });
 //------------------------------------------------CD LOGIC------------------------------------
-const cd_box = document.getElementById('cd_box');
 
 // clickin' districts
 map.on('click', 'community_districts', (e) => {
@@ -228,3 +224,18 @@ map.on('click', 'community_districts', (e) => {
 
 });
 
+// ------------------------- toggle listeners ---------------
+document.getElementById('cd-toggle').addEventListener('change', (e) => {
+  console.log('toggle time');
+  const opacity = e.target.checked ? 0.8 : 0;
+
+  map.setPaintProperty('community_districts', 'fill-opacity', opacity);
+  map.setPaintProperty('cd_outlines', 'line-opacity', opacity);
+
+});
+
+document.getElementById('building-toggle').addEventListener('change', (e) => {
+  const visibility = e.target.checked ? 'visible' : 'none';
+
+  map.setLayoutProperty('rs_units', 'visibility', visibility);
+});
