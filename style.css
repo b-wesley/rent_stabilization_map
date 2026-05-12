@@ -51,18 +51,18 @@ panel with info
 #info-panel {
   display: inline-block;
   flex-direction: column;
-  justify-content: center;
+  text-align: center;
+
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
-  
 
   background-color: white;
   color: black;
   opacity: 1;
-  box-shadow: 0 20px 80px  rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 8px  rgba(0, 0, 0, 0.5);
 
   width: 60%;
   height: 60%;
@@ -70,6 +70,7 @@ panel with info
   padding: 16px;
 
 }
+
 
 .control-panel {
   display: inline-block;
