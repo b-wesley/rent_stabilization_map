@@ -6,7 +6,8 @@ Currently the map simply displays where and how many units were removed from ren
 
 todo (for final project):
 - make color scheme look nicer
-- aggregate points when further out
+
+- move info panel hstpa summary to a splash screen
 - filter to:
     - +/- units only
     - no history of 421a/j51
@@ -19,9 +20,9 @@ todo (for final project):
     - no. of total units
     - total rs units
 
+- add sources and helpful links
+
 - click cds
-  - cd stats in info panel
-  - zoom to cd
   - illuminate the points in that cd
 
 - pop up
