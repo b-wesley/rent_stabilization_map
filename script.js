@@ -8,13 +8,13 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/standard', // Use the standard style for the map
     config: {
         basemap: {
-        lightPreset: 'night',
-        showPointOfInterestLabels: false,
-        showRoadLabels: false,
-        show3dTrees: false,
-        show3dLandmarks: false,
-        showLandmarkIconLabels: false,
-        theme: "faded"
+          lightPreset: 'night',
+          showPointOfInterestLabels: false,
+          showRoadLabels: false,
+          show3dTrees: false,
+          show3dLandmarks: false,
+          showLandmarkIconLabels: false,
+          theme: "faded"
         }
   },
     projection: 'globe', // display the map as a globe
@@ -30,7 +30,7 @@ map.on('style.load', () => {
 
   map.addSource('cds', {
     type: 'geojson',
-    data: 'data/cds_with_info.geojson'
+    data: 'data/cds_with_info_final.geojson'
   });
 
   //cd fill
@@ -125,7 +125,7 @@ map.on('style.load', () => {
         -750, "#d01c8b",
         -100, "#e9a3c9",
         -1, "#f1b6da",
-        0, "white",
+        0, "#ffffff",
         1, "#b8e186",
         50, "#7fbc41",
         100, "#4d9221",
@@ -207,11 +207,14 @@ map.on('click', 'community_districts', (e) => {
     
   //pull up cd info box
   const props = e.features[0].properties;
-
+  
   const cdta_name = props.CDTAName;
   const rs_unit_count = props.rs_unit_count.toLocaleString('en');
   const net_change = props.cd_net_unit_change.toLocaleString('en');
   
+  const centroid_lat = props.center_lat;
+  const centroid_lon = props.center_lon;
+
 
   console.log(e.features[0].properties);
 
@@ -222,6 +225,12 @@ map.on('click', 'community_districts', (e) => {
   `
   // highlight it 
   map.setFilter('cd-highlight', ['==', 'cd', props.cd]);
+  map.flyTo({
+    center: [centroid_lon, centroid_lat],
+    zoom: 13,
+  });
+
+  
 
 });
 
