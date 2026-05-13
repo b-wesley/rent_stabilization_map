@@ -19,6 +19,7 @@ const map = new mapboxgl.Map({
   },
     projection: 'globe', // display the map as a globe
     zoom: 10, // initial zoom level, 0 is the world view, higher values zoom in
+    minZoom: 9,
     center: [-74.04558, 40.70525] // center the map on this longitude and latitude
 });
 
@@ -46,15 +47,13 @@ map.on('style.load', () => {
         'interpolate',
         ['linear'],
         ['get', 'cd_net_unit_change'],
-        -750, "#d01c8b",
-        -100, "#e9a3c9",
-        -50, "#f1b6da",
-        -0.5, "#fde0ef",
-        0, "white",
-        0.5, "#e6f5d0",
-        10, "#b8e186",
-        50, "#7fbc41",
-        100, "#4d9221",
+        -500, "#4e0404",
+        -100, "#a01414",
+        -10, "#ad3e3e",
+        0, "#ffffff",
+        1, "#75c348",
+        50, "#1e7416",
+        100, "#004509",
       ]
     }
 
@@ -114,13 +113,13 @@ map.on('style.load', () => {
         'interpolate',
         ['linear'],
         ['get', 'rs_change_19_24'],
-        -750, "#d01c8b",
-        -100, "#e9a3c9",
-        -1, "#f1b6da",
+        -100, "#4e0404",
+        -10, "#a01414",
+        -1, "#ad3e3e",
         0, "#ffffff",
-        1, "#b8e186",
-        50, "#7fbc41",
-        100, "#4d9221",
+        1, "#75c348",
+        50, "#1e7416",
+        100, "#004509",
       ]
 
   );
