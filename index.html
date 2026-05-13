@@ -49,16 +49,19 @@
   </div>
 
   <div class="control-panel">
-            <div class="panel-header">Options</div>
-            <label class="toggle-item">
-                <input type="checkbox" id="cd-toggle">
-                <span>Show CD Fill</span>
-            </label>
-            <label class="toggle-item">
-                <input type="checkbox" id="building-toggle" checked>
-                <span>Show RS Buildings</span>
-            </label>
-        </div>
+    <div class="panel-header">Layer Toggle</div>
+    <div id="options">
+  
+        <input type="radio" id="cd_btn" name="layer" value="cds" />
+        <label for="cds">Community Districts</label>
+      
+    
+     
+        <input type="radio" id="building_btn" onclick="buildingClickHandler(this);" name="layer" value="buildings" />
+        <label for="buildings">Buildings</label>
+  
+    </div> 
+  </div>
 
   <div id="tooltip" class="tooltip"></div>
   <div id="cd_box" class="cd_box">Click on a Community District for More Info!</div>

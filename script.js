@@ -62,15 +62,7 @@ map.on('style.load', () => {
   
   //map.setLayoutProperty('community_districts', 'visibility', 'none');
 
-  map.addLayer({
-    id: 'cd_outlines',
-    type: 'line',
-    source: 'cds',
-    paint: {
-      'line-color': "#000000",
-      'line-opacity': 0
-    }
-  });
+ 
 
   // cd highlights
   map.addLayer({
@@ -235,20 +227,23 @@ map.on('click', 'community_districts', (e) => {
 });
 
 // ------------------------- toggle listeners ---------------
-document.getElementById('cd-toggle').addEventListener('change', (e) => {
-  console.log('toggle time');
+document.getElementById('cd_btn').addEventListener('click', (e) => {
+  
   const opacity = e.target.checked ? 0.8 : 0;
-  const vis = e.target.checked ? 'visible' : 'none';
 
   map.setPaintProperty('community_districts', 'fill-opacity', opacity);
-  map.setPaintProperty('cd_outlines', 'line-opacity', opacity);
-
+  
+  map.setLayoutProperty('rs_units', 'visibility', 'none');
+  
 });
 
-document.getElementById('building-toggle').addEventListener('change', (e) => {
+document.getElementById('building_btn').addEventListener('click', (e) => {
   const visibility = e.target.checked ? 'visible' : 'none';
 
+  
   map.setLayoutProperty('rs_units', 'visibility', visibility);
+  map.setPaintProperty('community_districts', 'fill-opacity', 0);
+  
 });
 
 // -----info splash screen modal fucntionality -----------------
@@ -267,3 +262,7 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 } 
+
+function buildingClickHandler(building_btn) {
+
+}
