@@ -28,7 +28,7 @@ map.addControl(new mapboxgl.NavigationControl());
 // add CDs
 map.on('style.load', () => {
   map.getCanvas().style.cursor = 'pointer';
-
+  document.getElementById('building_btn').checked = true;
   map.addSource('cds', {
     type: 'geojson',
     data: 'data/cds_with_info_final.geojson'
