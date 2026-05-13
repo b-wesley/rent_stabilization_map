@@ -62,12 +62,6 @@ cd_shp <- read_sf('data/nycd_26a/nycd.shp') %>%
   st_transform(4326) %>%
   mutate(cd_center = st_centroid(geometry),
          center_lon  = st_coordinates(cd_center)[,1],
-         center_lat = st_coordinates(cd_center)[,2])
+         center_lat = st_coordinates(cd_center)[,2]) %>%
+  st_write("data/cds_with_info_final.geojson")
 
-  st_write(cd_shp, "data/cds_with_info_final.geojson")
-
-
-cd_centers <- cd_shp %>%
-  select(cd, cd_center) %>%
-  mutate(geometry = cd_center) %>%
-  st_write('data/cd_centroids.geojson')
