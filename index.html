@@ -12,8 +12,8 @@
 
 <body>
   <div id="title-banner">
-    <h1>Your Rent Might Be Too High!!</h1>
-    <h4>How Has NYC's Rent-Stabilized Housing Stock Changed Since 2019?</h4>
+    <h1>How Has NYC's Rent-Stabilized Housing Stock Changed Since 2019?</h1>
+    <h4>Your Rent Might Be Too High!</h4>
   </div>
 
   <div id="info-panel" class="info-panel">
@@ -41,26 +41,37 @@
       removed from Rent Stabilization since 2019<br>
       Click on a Community District for more info
     </h3>
-    
-    
     <br> 
     If your building appears here, you can <a href='https://portal.hcr.ny.gov/app/ask'>request your rent history</a> from the state.
-    
   </div>
 
   <div class="control-panel">
     <div class="panel-header">Layer Toggle</div>
     <div id="options">
-  
         <input type="radio" id="cd_btn" name="layer" value="cds" />
         <label for="cds">Community Districts</label>
-      
-    
-     
-        <input type="radio" id="building_btn" onclick="buildingClickHandler(this);" name="layer" value="buildings" />
+        <br>
+        <input type="radio" id="building_btn" name="layer" value="buildings" />
         <label for="buildings">Buildings</label>
-  
     </div> 
+    <hr>
+    <div class="panel-header">Rent-Stabilized Segment</div>
+    <div id="rs_bucket_options">
+      <input type="radio" id="rs_all_btn" name="rs_bucket" value="rs_all" />
+      <label for="rs_all">All Rent-Stabilization</label>
+      <br>
+      <input type="radio" id="rs_prog_btn" name="rs_bucket" value="rs_prog" />
+      <label for="rs_prog">Programmatic</label>
+      <br>
+      <input type="radio" id="rs_non_prog_btn" name="rs_bucket" value="rs_non_prog" />
+      <label for="rs_non_prog">Non-Programmatic</label>
+    </div>
+    <hr>
+    Note: Some programmatic properties may be legally destabilized when their subsidy expires. 
+    Non-programmatic properties cannot be destabilized under any circumstances since 2019.
+    <a href="https://www.furmancenter.org/publication/understanding-different-segments-of-new-york-citys-rent-stabilized-housing-stock/">More information on types of Rent-Stabilized units</a>
+    <br>
+    <a href='https://portal.hcr.ny.gov/app/ask'>Request your rent history</a>
   </div>
 
   <div id="tooltip" class="tooltip"></div>

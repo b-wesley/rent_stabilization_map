@@ -42,7 +42,7 @@ map.on('style.load', () => {
     source: 'cds',
     paint: {
       'fill-opacity': 0,
-      'fill-emissive-strength': 0.6,
+      'fill-emissive-strength': 1,
       'fill-color': [
         'interpolate',
         ['linear'],
@@ -52,7 +52,7 @@ map.on('style.load', () => {
         -10, "#ad3e3e",
         0, "#ffffff",
         1, "#75c348",
-        50, "#1e7416",
+        10, "#1e7416",
         100, "#004509",
       ]
     }
@@ -71,10 +71,10 @@ map.on('style.load', () => {
     layout:{},
     paint:{
       'line-color': "#ea00ff",
-      'line-width': 5,
+      'line-width': 4,
       'line-opacity': 1,
-      'line-emissive-strength': .7,
-      'line-gap-width': 1
+      'line-emissive-strength': .8,
+      
       
     },
     filter: ['==', 'cd', '']
@@ -94,7 +94,7 @@ map.on('style.load', () => {
 
     // set dot color based on RS program
     'paint': {
-      'circle-emissive-strength': 1,
+      'circle-emissive-strength': 2,
       'circle-radius': [
                     'interpolate',
                     ['exponential', 2.72],
@@ -118,7 +118,7 @@ map.on('style.load', () => {
         -1, "#ad3e3e",
         0, "#ffffff",
         1, "#75c348",
-        50, "#1e7416",
+        10, "#1e7416",
         100, "#004509",
       ]
 
@@ -126,13 +126,12 @@ map.on('style.load', () => {
 })
 
 const color_scale = {
-  '-750': "#d01c8b",
-  '-100': "#e9a3c9",
-  '-1': "#f1b6da",
-  '0': "white",
-  '+1': "#b8e186",
-  '+50': "#7fbc41",
-  '+100': "#4d9221",
+  '-100 or more': "#4e0404",
+  '-10': "#a01414",
+  '-1': "#ad3e3e",
+  '+1': "#75c348",
+  '+10': "#1e7416",
+  '+100 or more': "#004509",
 }
 
 // add legend
@@ -211,8 +210,8 @@ map.on('click', 'community_districts', (e) => {
 
   cd_box.innerHTML = `${cdta_name}
                       <hr>
-                      Total RS Units: ${rs_unit_count}<br>
-                      Net RS Unit Change Since 2019: ${net_change}<br>
+                      Total Rent-Stabilized Units: ${rs_unit_count}<br>
+                      Net Rent-Stabilized Unit Change Since 2019: ${net_change}<br>
   `
   // highlight it 
   map.setFilter('cd-highlight', ['==', 'cd', props.cd]);
@@ -245,6 +244,25 @@ document.getElementById('building_btn').addEventListener('click', (e) => {
   
 });
 
+document.getElementById('rs_all_btn').addEventListener('click', (e) => {
+  if(e.target.checked) {
+    map.setFilter('rs_units', true)
+  }
+  
+});
+
+document.getElementById('rs_prog_btn').addEventListener('click', (e) => {
+  if(e.target.checked) {
+    map.setFilter('rs_units', ['==', 'programmatic_properties', 1])
+  }
+});
+
+document.getElementById('rs_non_prog_btn').addEventListener('click', (e) => {
+  if(e.target.checked) {
+    map.setFilter('rs_units', ['==', 'programmatic_properties', 0])
+  }
+});
+
 // -----info splash screen modal fucntionality -----------------
 var modal = document.getElementById("info-panel");
 
@@ -261,7 +279,3 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 } 
-
-function buildingClickHandler(building_btn) {
-
-}
