@@ -19,7 +19,11 @@ const map = new mapboxgl.Map({
   },
     projection: 'globe', // display the map as a globe
     zoom: 10, // initial zoom level, 0 is the world view, higher values zoom in
-    minZoom: 9,
+    minZoom: 8,
+    maxBounds: [
+    [-74.786, 40.49], 
+    [-73.29, 41.02]
+],
     center: [-74.04558, 40.70525] // center the map on this longitude and latitude
 });
 
@@ -213,7 +217,7 @@ map.on('click', 'community_districts', (e) => {
 
   console.log(e.features[0].properties);
 
-  cd_box.innerHTML = `${cdta_name}
+  cd_box.innerHTML = `<h3>${cdta_name}</h3>
                       <hr>
                       Total Rent-Stabilized Units: ${rs_unit_count}<br>
                       Net Rent-Stabilized Unit Change Since 2019: ${net_change}<br>
