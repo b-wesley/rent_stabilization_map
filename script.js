@@ -114,10 +114,9 @@ map.on('style.load', () => {
                     120
                 ],
     }
-
-    // set dot color based on number of units lost since 2019
   });
 
+  // set dot color based on number of units lost since 2019
   map.setPaintProperty('rs_units', 'circle-color',[
         'interpolate',
         ['linear'],
@@ -170,8 +169,6 @@ const tooltip = document.getElementById('tooltip');
 
 map.on('click', 'rs_units', (e) => {
   const props = e.features[0].properties;
-  console.log(props);
-  console.log(props.rs_change_19_24);
 });
 
 // bring up address/bbl and unit change in tooltip
@@ -207,6 +204,7 @@ map.on('click', 'community_districts', (e) => {
   //pull up cd info box
   const props = e.features[0].properties;
   
+  // unpack content for cd box and format numbers
   const cdta_name = props.CDTAName;
   const rs_unit_count = props.rs_unit_count.toLocaleString('en');
   const net_change = props.cd_net_unit_change.toLocaleString('en');
@@ -214,9 +212,7 @@ map.on('click', 'community_districts', (e) => {
   const centroid_lat = props.center_lat;
   const centroid_lon = props.center_lon;
 
-
-  console.log(e.features[0].properties);
-
+  //set html
   cd_box.innerHTML = `<h3>${cdta_name}</h3>
                       <hr>
                       Total Rent-Stabilized Units: ${rs_unit_count}<br>
@@ -234,38 +230,38 @@ map.on('click', 'community_districts', (e) => {
 });
 
 // ------------------------- toggle listeners ---------------
+// toggle cd fill and turn off rs units
 document.getElementById('cd_btn').addEventListener('click', (e) => {
   
   const opacity = e.target.checked ? 0.8 : 0;
 
   map.setPaintProperty('community_districts', 'fill-opacity', opacity);
-  
   map.setLayoutProperty('rs_units', 'visibility', 'none');
-  
 });
 
+// toggle rs building visibility and turn off cd fill
 document.getElementById('building_btn').addEventListener('click', (e) => {
   const visibility = e.target.checked ? 'visible' : 'none';
 
-  
   map.setLayoutProperty('rs_units', 'visibility', visibility);
   map.setPaintProperty('community_districts', 'fill-opacity', 0);
-  
 });
 
+// filter to all rs units
 document.getElementById('rs_all_btn').addEventListener('click', (e) => {
   if(e.target.checked) {
     map.setFilter('rs_units', true)
   }
-  
 });
 
+// filter to just programmatic units
 document.getElementById('rs_prog_btn').addEventListener('click', (e) => {
   if(e.target.checked) {
     map.setFilter('rs_units', ['==', 'programmatic_properties', 1])
   }
 });
 
+//filter to just non-programmatic units
 document.getElementById('rs_non_prog_btn').addEventListener('click', (e) => {
   if(e.target.checked) {
     map.setFilter('rs_units', ['==', 'programmatic_properties', 0])
@@ -273,21 +269,12 @@ document.getElementById('rs_non_prog_btn').addEventListener('click', (e) => {
 });
 
 // -----info splash screen modal fucntionality -----------------
+// get modal and close button
 var modal = document.getElementById("splash-panel");
-
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on <span> (x), close the modal
+// close modal and overlay on click
 span.onclick = function() {
   modal.style.display = "none";
   document.getElementById('splash-overlay').style.display = 'none';
 }
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-    document.getElementById('splash-overlay').style.display = 'none';
-
-  }
-} 
