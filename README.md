@@ -6,3 +6,6 @@ Using data from the Furman Center and the NYC Department of Finance, this map il
 
 Click on the map to see high-level stats about a Community District's rent-stabilized housing stock or hover over a building to see how many rent-stabilized units it has lost or gained since 2019. 
 
+Data Information:
+Source data derived from DOF and Furman Center Data can be found in cds_with_info_final.geojson and rent_stab.geojson. Additional data cleaning and processing is in data_prep.R.
+
