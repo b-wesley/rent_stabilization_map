@@ -269,7 +269,7 @@ document.getElementById('rs_non_prog_btn').addEventListener('click', (e) => {
 });
 
 // -----info splash screen modal fucntionality -----------------
-var modal = document.getElementById("info-panel");
+var modal = document.getElementById("splash-panel");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
