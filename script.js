@@ -104,10 +104,10 @@ map.on('style.load', () => {
                     'interpolate',
                     ['exponential', 2.72],
                     ['zoom'],
-                    12,
+                    8,
                     2,
-                    20,
-                    200
+                    19,
+                    120
                 ],
     }
 
@@ -277,10 +277,13 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
+  document.getElementById('splash-overlay').style.display = 'none';
 }
 
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    document.getElementById('splash-overlay').style.display = 'none';
+
   }
 } 
